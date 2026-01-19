@@ -1,68 +1,80 @@
 import { Link } from "@tanstack/react-router";
+import { RiLogoutBoxLine } from "@remixicon/react";
+import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
+import { selectCurrentUser, logout } from "@/lib/store/slices/auth-slice";
+import { buttonVariants } from "../ui/button";
+import { cn } from "@/lib/utils";
 import {
-  RiSearchLine,
-  RiShoppingBasketLine,
-  RiUserLine,
-  RiLogoutBoxLine,
-} from "@remixicon/react";
-import { useAppDispatch, useAppSelector } from "@/app/hooks";
-import { selectCurrentUser, logout } from "@/features/auth/authSlice";
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
 export function Navbar() {
   const user = useAppSelector(selectCurrentUser);
   const dispatch = useAppDispatch();
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-3 bg-background border-b border-border shadow-none">
-      <div className="flex items-center gap-8">
-        <Link
-          to="/"
-          className="text-xl font-bold tracking-tight text-primary/60 skew-x-12"
-        >
-          Rec
+    <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-3 bg-background border-b border-border">
+      <div className="flex items-center gap-6">
+        <Link to="/" className="text-base font-bold text-foreground">
+          Recipes
         </Link>
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-4">
           <NavLink to="/">Home</NavLink>
-          <NavLink to="/dashboard">Dashboard</NavLink>
+          <NavLink to="/recipes">Recipes</NavLink>
+          {user && <NavLink to="/dashboard">Dashboard</NavLink>}
         </div>
       </div>
 
-      <div className="flex items-center gap-4 text-foreground">
-        <button className="p-2 hover:bg-muted rounded-md transition-colors text-muted-foreground hover:text-foreground">
-          <RiSearchLine size={18} />
-        </button>
-        <div className="relative">
-          <button className="p-2 hover:bg-muted rounded-md transition-colors text-muted-foreground hover:text-foreground">
-            <RiShoppingBasketLine size={18} />
-          </button>
-          <span className="absolute top-0 right-0 bg-primary text-primary-foreground text-[9px] font-bold h-3.5 w-3.5 flex items-center justify-center rounded-sm">
-            2
-          </span>
-        </div>
-
+      <div className="flex items-center gap-3">
         {user ? (
-          <div className="flex items-center gap-3 pl-2 border-l border-border">
-            <span className="text-sm font-semibold hidden md:block text-foreground">
-              {user.username}
-            </span>
-            <img
-              src={user.image}
-              alt={user.username}
-              className="w-7 h-7 rounded-full border border-border"
-            />
-            <button
-              onClick={() => dispatch(logout())}
-              className="p-1.5 hover:bg-muted rounded-md transition-colors text-muted-foreground hover:text-destructive"
-            >
-              <RiLogoutBoxLine size={18} />
-            </button>
-          </div>
+          <DropdownMenu>
+            <DropdownMenuTrigger className="outline-none">
+              <Avatar>
+                <AvatarImage src={user.image} alt={user.username} />
+                <AvatarFallback>{user.username[0]}</AvatarFallback>
+              </Avatar>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className={"w-64"}>
+              <DropdownMenuGroup>
+
+              <DropdownMenuLabel className={"flex gap-1"}>
+                 <Avatar>
+                <AvatarImage src={user.image} alt={user.username} />
+                <AvatarFallback>{user.username[0]}</AvatarFallback>
+              </Avatar>
+                <div className="flex flex-col space-y-1">
+                  <p className="text-sm font-medium leading-none">
+                    {user.username}
+                  </p>
+                  <p className="text-xs leading-none text-muted-foreground">
+                    {user.email}
+                  </p>
+                </div>
+              </DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem
+                className="text-destructive focus:text-destructive cursor-pointer"
+                onClick={() => dispatch(logout())}
+              >
+                <RiLogoutBoxLine size={16} />
+                <span>Log out</span>
+              </DropdownMenuItem>
+                </DropdownMenuGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
         ) : (
           <Link
             to="/login"
-            className="p-2 hover:bg-muted rounded-md transition-colors text-muted-foreground hover:text-foreground"
+            className={cn(buttonVariants({ variant: "default" }))}
           >
-            <RiUserLine size={18} />
+            Sign In
           </Link>
         )}
       </div>
@@ -73,17 +85,15 @@ export function Navbar() {
 function NavLink({
   to,
   children,
-  className,
 }: {
   to: string;
   children: React.ReactNode;
-  className?: string;
 }) {
   return (
     <Link
       to={to}
       activeProps={{ className: "text-primary" }}
-      className={`text-sm font-medium text-muted-foreground hover:text-foreground transition-all ${className}`}
+      className="text-[12px] font-medium text-muted-foreground hover:text-foreground"
     >
       {children}
     </Link>

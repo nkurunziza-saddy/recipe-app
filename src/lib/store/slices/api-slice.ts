@@ -5,13 +5,13 @@ export const apiSlice = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "https://dummyjson.com",
     prepareHeaders: (headers, { getState }) => {
-      const token = (getState() as any).auth?.token;
+      const token = (getState() as any).auth?.accessToken;
       if (token) {
-        headers.set("authorization", `Bearer ${token}`);
+        headers.set("Authorization", `Bearer ${token}`);
       }
       return headers;
     },
   }),
-  tagTypes: ["Recipe", "User"],
+  tagTypes: ["recipe", "auth"],
   endpoints: () => ({}),
 });

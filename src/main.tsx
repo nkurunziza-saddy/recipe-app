@@ -17,7 +17,7 @@ declare module "@tanstack/react-router" {
 }
 
 import { Provider } from "react-redux";
-import { store } from "./app/store";
+import { store } from "./lib/store";
 
 // Render the app
 const rootElement = document.getElementById("root")!;

@@ -2,13 +2,10 @@ import { createFileRoute, redirect, Outlet } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/_auth")({
   beforeLoad: () => {
-    const token = localStorage.getItem("token");
-    if (!token) {
+    const token = localStorage.getItem("logged-in-token");
+    if (!token || token === "null") {
       throw redirect({
         to: "/login",
-        search: {
-          redirect: location.href,
-        },
       });
     }
   },
