@@ -22,7 +22,7 @@ const recipesSlice = createSlice({
   reducers: {
     setSearchQuery: (state, action: PayloadAction<string>) => {
       state.searchQuery = action.payload;
-      state.skip = 0; // Reset to first page on search
+      state.skip = 0;
     },
     setSortBy: (state, action: PayloadAction<string>) => {
       state.sortBy = action.payload;
@@ -32,14 +32,12 @@ const recipesSlice = createSlice({
     },
     setLimit: (state, action: PayloadAction<number>) => {
       state.limit = action.payload;
-      state.skip = 0; // Reset to first page on limit change
+      state.skip = 0;
     },
     setSkip: (state, action: PayloadAction<number>) => {
       state.skip = action.payload;
     },
     setPage: (state, action: PayloadAction<number>) => {
-        // Calculate skip based on page number and limit
-        // Assuming page is 1-indexed
         const page = action.payload;
         if (page > 0) {
             state.skip = (page - 1) * state.limit;
@@ -64,5 +62,4 @@ export const selectRecipesSortBy = (state: any) => state.recipes.sortBy;
 export const selectRecipesOrder = (state: any) => state.recipes.order;
 export const selectRecipesLimit = (state: any) => state.recipes.limit;
 export const selectRecipesSkip = (state: any) => state.recipes.skip;
-// Helper selector for current page (1-indexed)
 export const selectRecipesPage = (state: any) => Math.floor(state.recipes.skip / state.recipes.limit) + 1;
