@@ -10,8 +10,8 @@ export function Card({
   return (
     <div
       className={clsx(
-        "relative overflow-hidden rounded-xl bg-white border border-gray-200 shadow-sm transition-all hover:shadow-md",
-        className,
+        "relative overflow-hidden rounded-xl bg-foreground border border-gray-200 shadow-sm transition-all hover:shadow-md",
+        className
       )}
     >
       {children}

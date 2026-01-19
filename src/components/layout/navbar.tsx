@@ -17,17 +17,13 @@ export function Navbar() {
       <div className="flex items-center gap-8">
         <Link
           to="/"
-          className="text-xl font-bold tracking-tight text-foreground"
+          className="text-xl font-bold tracking-tight text-primary/60 skew-x-12"
         >
-          AM
+          Rec
         </Link>
         <div className="flex items-center gap-6">
-          <NavLink to="/">Products</NavLink>
-          <NavLink to="/">Recipes</NavLink>
-          <NavLink to="/dashboard" className="text-primary font-semibold">
-            Dashboard
-          </NavLink>
-          <NavLink to="/">Adventure</NavLink>
+          <NavLink to="/">Home</NavLink>
+          <NavLink to="/dashboard">Dashboard</NavLink>
         </div>
       </div>
 
@@ -86,6 +82,7 @@ function NavLink({
   return (
     <Link
       to={to}
+      activeProps={{ className: "text-primary" }}
       className={`text-sm font-medium text-muted-foreground hover:text-foreground transition-all ${className}`}
     >
       {children}

@@ -5,7 +5,7 @@ export const Route = createFileRoute("/")({
 });
 
 import { RecipeList } from "../features/recipes/RecipeList";
-import { Hero } from "../components/layout/Hero";
+import { Hero } from "../components/layout/hero";
 
 function Index() {
   return (

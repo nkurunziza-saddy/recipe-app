@@ -18,7 +18,7 @@ export function RecipeCard({ recipe }: { recipe: Recipe }) {
           <div className="absolute top-2 right-2 flex gap-1">
             <Badge
               variant="secondary"
-              className="bg-white/90 backdrop-blur shadow-sm font-bold text-[10px] px-1.5 py-0.5"
+              className="bg-foreground/90 backdrop-blur shadow-sm font-bold text-[10px] px-1.5 py-0.5"
             >
               ⭐ {recipe.rating}
             </Badge>

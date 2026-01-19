@@ -9,7 +9,6 @@ export function Hero() {
   return (
     <div className="py-12 bg-background border-b border-border">
       <div className="flex flex-col md:flex-row items-center gap-8 max-w-7xl mx-auto px-6">
-        {/* Left: Text Content */}
         <div className="flex-1 space-y-6 text-center md:text-left">
           <div className="space-y-3">
             <span className="inline-block px-3 py-1 rounded-md bg-secondary text-secondary-foreground font-semibold text-xs tracking-wide">
@@ -19,18 +18,15 @@ export function Hero() {
               Premium Organic Salsa
             </h1>
             <p className="text-base text-muted-foreground max-w-lg mx-auto md:mx-0 leading-relaxed">
-              Authentic Mexican heritage. Handcrafted, 100% organic, pure
+              Authentic Rwandan heritage. Handcrafted, 100% organic, pure
               flavor.
             </p>
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3 justify-center md:justify-start">
             <button className="px-6 py-2.5 bg-primary text-primary-foreground rounded-md font-semibold text-sm hover:opacity-90 transition-all flex items-center justify-center gap-2">
-              Shop Now <RiArrowRightLine size={16} />
+              Find recipes <RiArrowRightLine size={16} />
             </button>
-            <div className="flex items-center justify-center gap-2 px-4 py-2.5 rounded-md border border-border bg-background font-semibold text-foreground text-sm">
-              $14.49
-            </div>
           </div>
 
           <div className="pt-2 flex flex-wrap gap-3 justify-center md:justify-start">
@@ -49,9 +45,8 @@ export function Hero() {
           </div>
         </div>
 
-        {/* Right: Product Visual (Compact) */}
         <div className="flex-1 flex justify-center">
-          <div className="w-[280px] bg-white rounded-lg border border-border shadow-sm overflow-hidden transform hover:-translate-y-1 transition-transform duration-300">
+          <div className="w-80 bg-foregorund rounded-lg border border-border overflow-hidden">
             <div className="h-48 bg-secondary/30 flex items-center justify-center">
               <span className="text-8xl">🍅</span>
             </div>
